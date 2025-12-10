@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h3>{{ editMode ? 'Update Employee' : 'Add Employee' }}</h3>
+
+  <form [formGroup]="empForm" (ngSubmit)="onSubmit()" class="mt-3">
+    <div class="mb-3">
+      <label class="form-label">Employee Name</label>
+      <input type="text" formControlName="empName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Employee Salary</label>
+      <input type="number" formControlName="empSalary" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Department</label>
+      <select formControlName="depName" class="form-control">
+        <option value="">Select Department</option>
+        <option *ngFor="let d of departments" [value]="d.depName">{{ d.depName }}</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit">{{ editMode ? 'Update Employee' : 'Add Employee' }}</button>
+  </form>
+
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>

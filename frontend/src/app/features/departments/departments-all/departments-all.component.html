@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <h3>Departments</h3>
+  <form [formGroup]="getAllDepForm">
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>Department ID</th>
+          <th>Department Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of departments">
+          <td>{{ d.depID }}</td>
+          <td>{{ d.depName }}</td>
+          <td>
+            <button class="btn btn-primary me-2" (click)="onEdit(d)">
+              Edit
+            </button>
+            <button class="btn btn-danger" (click)="onDelete(d.depID)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-secondary" (click)="addDepartment()">
+              Add Department
+            </button>
+  </form>
+</div>

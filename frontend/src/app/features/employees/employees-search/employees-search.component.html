@@ -1,0 +1,79 @@
+<div class="container mt-4">
+  <h3>Search Employees</h3>
+
+  <form [formGroup]="employeeSeachForm" (ngSubmit)="onSearch()" class="mt-3">
+    <div class="mb-3">
+      <label class="form-label">Employee Name</label>
+      <input type="text" formControlName="employeeName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Employee Salary</label>
+      <input type="number" formControlName="salary" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Department</label>
+      <select formControlName="departmentName" class="form-control">
+        <option value="">Select Department</option>
+        <option *ngFor="let d of departments" [value]="d.depName">
+          {{ d.depName }}
+        </option>
+      </select>
+    </div>
+    <div class="mb-3 d-flex gap-2">
+      <button class="btn btn-primary" type="submit">Search Employees</button>
+      <button
+        class="btn btn-secondary"
+        type="button"
+        (click)="goToAddEmployee()"
+      >
+        Add Employee
+      </button>
+      <button
+        class="btn btn-secondary"
+        type="button"
+        (click)="searchDepartments()"
+      >
+        Search Departments
+      </button>
+    </div>
+  </form>
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>
+<div class="container mt-4" *ngIf="searchResults.length > 0">
+  <h3>Search Results</h3>
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Salary</th>
+        <th>Department</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of searchResults">
+        <td>{{ emp.empName }}</td>
+        <td>{{ emp.empSalary }}</td>
+        <td>{{ emp.depName }}</td>
+        <td>
+          <button
+            class="btn btn-sm btn-primary me-2"
+            (click)="editEmployee(emp)"
+          >
+            Edit
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteEmployee(emp)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
